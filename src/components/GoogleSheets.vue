@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <h1>Google Sheets Data</h1>
     <div v-if="loading">Loading...</div>
@@ -127,4 +127,4 @@ export default {
 
 <style scoped>
 /* Your styles here */
-</style>
+</style> -->

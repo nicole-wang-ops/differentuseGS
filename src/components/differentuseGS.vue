@@ -48,8 +48,8 @@ export default {
   },
   methods: {
     initClient() {
-      const clientId = '562278447012-g8107er0h2v1s3nidqe4svp3dd6o16i2.apps.googleusercontent.com';
-      const redirectUri = 'https://nicole-wang-ops.github.io/differentuseGS/';
+      const clientId = process.env.VUE_APP_GOOGLE_CLIENT_ID;
+      const redirectUri = process.env.VUE_APP_REDIRECT_URI;
       const scope = 'https://www.googleapis.com/auth/spreadsheets';
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
 
@@ -69,8 +69,8 @@ export default {
       }
 
       this.loading = true;
-      const SHEET_ID = '1p0VikCs8qqlMNTuWhHkZNrvFj913wqLy5N5rSgZwNTU';
-      const RANGE = 'Sheet1!A1:C1000';
+      const SHEET_ID = process.env.VUE_APP_GOOGLE_SHEET_ID;
+      const RANGE = process.env.VUE_APP_GOOGLE_SHEET_RANGE;
 
       fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?access_token=${this.accessToken}`)
         .then(response => response.json())
@@ -94,7 +94,7 @@ export default {
         return;
       }
 
-      const SHEET_ID = '1p0VikCs8qqlMNTuWhHkZNrvFj913wqLy5N5rSgZwNTU';
+      const SHEET_ID = process.env.VUE_APP_GOOGLE_SHEET_ID;
       const RANGE = 'Sheet1';
 
       const valueRangeBody = {
