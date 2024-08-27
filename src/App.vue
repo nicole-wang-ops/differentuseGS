@@ -1,14 +1,14 @@
 <template>
-  <differentuseGS msg="Welcome to Your Vue.js App"/>
+  <differentuseGS2 msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import differentuseGS from './components/differentuseGS.vue'
+import differentuseGS2 from './components/differentuseGS2.vue'
 
 export default {
   name: 'App',
   components: {
-    differentuseGS
+    differentuseGS2
   }
 }
 </script>

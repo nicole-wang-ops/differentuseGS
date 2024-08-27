@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div>
     <h1>Google Sheets Data2</h1>
     <div v-if="loading">Loading...</div>
@@ -48,40 +48,45 @@ export default {
   },
   methods: {
     initClient() {
-      const clientId = process.env.VUE_APP_GOOGLE_CLIENT_ID;
-      const redirectUri = process.env.VUE_APP_REDIRECT_URI;
-      const scope = 'https://www.googleapis.com/auth/spreadsheets';
-      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+        const clientId = process.env.VUE_APP_GOOGLE_CLIENT_ID;
+        const redirectUri = process.env.VUE_APP_REDIRECT_URI;
+        const scope = 'https://www.googleapis.com/auth/spreadsheets';
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
 
-      const urlParams = new URLSearchParams(window.location.hash.substr(1));
-      this.accessToken = urlParams.get('access_token');
+        // 通过 URLSearchParams 提取 `access_token`
+        const urlParams = new URLSearchParams(window.location.hash.substr(1));
+        this.accessToken = urlParams.get('access_token');
 
-      if (!this.accessToken) {
+        if (!this.accessToken) {
+        // 如果没有 access_token，重定向到授权页面
         window.location.href = authUrl;
-      } else {
-        window.history.pushState({},null,window.location.pathname);
+        } else {
+        // 如果获取到 access_token，立即清除 URL 中的 hash 部分
+        window.history.pushState({}, null, window.location.pathname);
+
+        // 继续获取 Google Sheets 数据
         this.fetchGoogleSheetsData();
-      }
+        }
     },
     fetchGoogleSheetsData() {
-      if (!this.accessToken) {
+        if (!this.accessToken) {
         this.error = 'Access token is required';
         return;
-      }
+        }
 
-      this.loading = true;
-      const SHEET_ID = process.env.VUE_APP_GOOGLE_SHEET_ID;
-      const RANGE = process.env.VUE_APP_GOOGLE_SHEET_RANGE;
+        this.loading = true;
+        const SHEET_ID = process.env.VUE_APP_GOOGLE_SHEET_ID;
+        const RANGE = process.env.VUE_APP_GOOGLE_SHEET_RANGE;
 
-      fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?access_token=${this.accessToken}`)
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?access_token=${this.accessToken}`)
         .then(response => response.json())
         .then(data => {
-          this.sheetsData = data.values || [];
-          this.loading = false;
+            this.sheetsData = data.values || [];
+            this.loading = false;
         })
         .catch(error => {
-          this.error = 'Error fetching data: ' + error.message;
-          this.loading = false;
+            this.error = 'Error fetching data: ' + error.message;
+            this.loading = false;
         });
     },
     addRow() {
@@ -129,4 +134,4 @@ export default {
 
 <style scoped>
 /* Your styles here */
-</style> -->
+</style>
