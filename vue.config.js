@@ -4,10 +4,10 @@ const { defineConfig } = require('@vue/cli-service')
 //   transpileDependencies: true
 // })
 
-//测试github的
+//github仓库名
 module.exports={
   publicPath:process.env.NODE_ENV === 'production'
-  ?'/differentuseGS3/'
+  ?'/testdiuG/'
   :'/'
 }
 
