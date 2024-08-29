@@ -7,7 +7,7 @@ const { defineConfig } = require('@vue/cli-service')
 //测试github的
 module.exports={
   publicPath:process.env.NODE_ENV === 'production'
-  ?'/differentuseGS/'
+  ?'/differentuseGS3/'
   :'/'
 }
 
